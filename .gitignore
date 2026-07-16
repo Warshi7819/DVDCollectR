@@ -1,0 +1,15 @@
+/plans/
+/AGENTS.md
+/wwwroot/images/DVDs/
+**/Collection.xml
+**/dvds.db
+**/dvds.db-shm
+**/dvds.db-wal
+/.vs
+/DVDCollectRAPI/bin/Debug/net10.0
+/DVDCollectRAPI/obj
+/DVDCollectRShared/bin/Debug/net10.0
+/DVDCollectRShared/obj
+/DVDCollectRWeb/bin/Debug/net10.0
+/DVDCollectRWeb/obj
+/DVDCollectRWeb/wwwroot/images/DVDs
