@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="DVDCollectRAPI/DVDCollectRAPI.csproj" />
+  <Project Path="DVDCollectRShared/DVDCollectRShared.csproj" />
+  <Project Path="DVDCollectRWeb/DVDCollectRWeb.csproj" />
+</Solution>

@@ -1,0 +1,52 @@
+@DVDCollectRAPI_HostAddress = http://localhost:5084
+
+### Get all DVDs
+GET {{DVDCollectRAPI_HostAddress}}/api/dvds
+Accept: application/json
+
+### Search DVDs by title
+GET {{DVDCollectRAPI_HostAddress}}/api/dvds?title=Star%20Wars
+Accept: application/json
+
+### Search DVDs by actor
+GET {{DVDCollectRAPI_HostAddress}}/api/dvds?actor=Harrison%20Ford
+Accept: application/json
+
+### Search DVDs by genre
+GET {{DVDCollectRAPI_HostAddress}}/api/dvds?genre=Action
+Accept: application/json
+
+### Combined search
+GET {{DVDCollectRAPI_HostAddress}}/api/dvds?title=Star&genre=Science-Fiction
+Accept: application/json
+
+### Get DVD by ID
+GET {{DVDCollectRAPI_HostAddress}}/api/dvds/1
+Accept: application/json
+
+### Create a new DVD (only Title is required)
+POST {{DVDCollectRAPI_HostAddress}}/api/dvds
+Content-Type: application/json
+
+{
+  "title": "My New DVD",
+  "genres": ["Action", "Sci-Fi"],
+  "productionYear": 2024,
+  "director": "Jane Doe",
+  "actors": "John Smith, Jane Doe",
+  "overview": "A test DVD entry."
+}
+
+### Create a minimal DVD (only Title)
+POST {{DVDCollectRAPI_HostAddress}}/api/dvds
+Content-Type: application/json
+
+{
+  "title": "Minimal Entry"
+}
+
+### Get all genres
+GET {{DVDCollectRAPI_HostAddress}}/api/genres
+Accept: application/json
+
+###

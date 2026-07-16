@@ -1,0 +1,234 @@
+@page "{id:int}"
+@model DetailsModel
+@{
+    ViewData["Title"] = Model.Dvd.Title;
+}
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-page="./Collection">Collection</a></li>
+        <li class="breadcrumb-item active">@Model.Dvd.Title</li>
+    </ol>
+</nav>
+
+<div class="row">
+    <div class="col-md-4 col-lg-3 mb-3">
+        @if (Model.HasFrontCover)
+        {
+            <img src="@Model.FrontCoverPath" class="img-fluid mb-2" alt="Front cover" />
+        }
+        @if (Model.HasBackCover)
+        {
+            <img src="@Model.BackCoverPath" class="img-fluid" alt="Back cover" />
+        }
+        @if (!Model.HasFrontCover && !Model.HasBackCover)
+        {
+            <div class="border rounded d-flex align-items-center justify-content-center bg-light" style="min-height: 220px;">
+                <span class="text-muted">No cover image</span>
+            </div>
+        }
+    </div>
+    <div class="col-md-8 col-lg-9">
+        <h2 class="mb-1">@Model.Dvd.Title</h2>
+        @if (!string.IsNullOrEmpty(Model.Dvd.OriginalTitle) && Model.Dvd.OriginalTitle != Model.Dvd.Title)
+        {
+            <p class="text-muted mb-2"><em>@Model.Dvd.OriginalTitle</em></p>
+        }
+        <div class="d-flex flex-wrap gap-2 align-items-center mb-3">
+            @if (Model.Dvd.ProductionYear.HasValue)
+            {
+                <span class="badge bg-secondary fs-6">@Model.Dvd.ProductionYear</span>
+            }
+            @foreach (var genre in Model.Dvd.Genres)
+            {
+                <span class="badge bg-info fs-6">@genre</span>
+            }
+            @if (!string.IsNullOrEmpty(Model.Dvd.Rating))
+            {
+                <span class="badge bg-warning text-dark fs-6">@Model.Dvd.Rating</span>
+            }
+            @if (Model.Dvd.RunningTime.HasValue)
+            {
+                var hrs = Model.Dvd.RunningTime.Value / 60;
+                var mins = Model.Dvd.RunningTime.Value % 60;
+                <span class="badge bg-secondary fs-6">@(hrs)h @(mins)m</span>
+            }
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card mb-3">
+                    <div class="card-header fw-bold">Details</div>
+                    <div class="card-body">
+                        <dl class="row mb-0">
+                            <dt class="col-sm-5">Original Title</dt>
+                            <dd class="col-sm-7">@(Model.Dvd.OriginalTitle ?? Model.Dvd.Title)</dd>
+
+                            <dt class="col-sm-5">Production Year</dt>
+                            <dd class="col-sm-7">@(Model.Dvd.ProductionYear?.ToString() ?? "—")</dd>
+
+                            <dt class="col-sm-5">Released</dt>
+                            <dd class="col-sm-7">@(Model.Dvd.Released ?? "—")</dd>
+
+                            <dt class="col-sm-5">Country of Origin</dt>
+                            <dd class="col-sm-7">@(Model.Dvd.CountryOfOrigin ?? "—")</dd>
+
+                            <dt class="col-sm-5">Runtime</dt>
+                            <dd class="col-sm-7">
+                                @if (Model.Dvd.RunningTime.HasValue)
+                                {
+                                    var hrs = Model.Dvd.RunningTime.Value / 60;
+                                    var mins = Model.Dvd.RunningTime.Value % 60;
+                                    <text>@(hrs)h @(mins)m (@(Model.Dvd.RunningTime) min)</text>
+                                }
+                                else
+                                {
+                                    <text>—</text>
+                                }
+                            </dd>
+
+                            <dt class="col-sm-5">Rating</dt>
+                            <dd class="col-sm-7">@(Model.Dvd.Rating ?? "—")</dd>
+
+                            <dt class="col-sm-5">Rating System</dt>
+                            <dd class="col-sm-7">@(Model.Dvd.RatingSystem ?? "—")</dd>
+
+                            @if (Model.Dvd.RatingAge.HasValue)
+                            {
+                                <dt class="col-sm-5">Rating Age</dt>
+                                <dd class="col-sm-7">@Model.Dvd.RatingAge</dd>
+                            }
+
+                            @if (!string.IsNullOrEmpty(Model.Dvd.RatingDetails))
+                            {
+                                <dt class="col-sm-5">Rating Details</dt>
+                                <dd class="col-sm-7">@Model.Dvd.RatingDetails</dd>
+                            }
+                        </dl>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card mb-3">
+                    <div class="card-header fw-bold">Media Info</div>
+                    <div class="card-body">
+                        <dl class="row mb-0">
+                            <dt class="col-sm-5">UPC</dt>
+                            <dd class="col-sm-7">@(Model.Dvd.UPC ?? "—")</dd>
+
+                            <dt class="col-sm-5">Collection #</dt>
+                            <dd class="col-sm-7">@(Model.Dvd.CollectionNumber?.ToString() ?? "—")</dd>
+
+                            <dt class="col-sm-5">Case Type</dt>
+                            <dd class="col-sm-7">@(Model.Dvd.CaseType ?? "—")</dd>
+
+                            <dt class="col-sm-5">Media Types</dt>
+                            <dd class="col-sm-7">@(Model.Dvd.MediaTypes ?? "—")</dd>
+
+                            <dt class="col-sm-5">Regions</dt>
+                            <dd class="col-sm-7">@(Model.Dvd.Regions ?? "—")</dd>
+
+                            <dt class="col-sm-5">Disc Count</dt>
+                            <dd class="col-sm-7">@(Model.Dvd.DiscCount?.ToString() ?? "—")</dd>
+
+                            <dt class="col-sm-5">Studios</dt>
+                            <dd class="col-sm-7">@(Model.Dvd.Studios ?? "—")</dd>
+
+                            <dt class="col-sm-5">Director</dt>
+                            <dd class="col-sm-7">@(Model.Dvd.Director ?? "—")</dd>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@if (!string.IsNullOrEmpty(Model.Dvd.Overview))
+{
+    <div class="card mb-3">
+        <div class="card-header fw-bold">Overview</div>
+        <div class="card-body">
+            <p class="mb-0">@Model.Dvd.Overview</p>
+        </div>
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card mb-3">
+            <div class="card-header fw-bold">Cast</div>
+            <div class="card-body">
+                @if (!string.IsNullOrEmpty(Model.Dvd.Actors))
+                {
+                    var actorLines = Model.Dvd.Actors.Split(',', StringSplitOptions.TrimEntries);
+                    <table class="table table-sm mb-0">
+                        <tbody>
+                            @foreach (var actor in actorLines)
+                            {
+                                <tr><td>@actor</td></tr>
+                            }
+                        </tbody>
+                    </table>
+                }
+                else
+                {
+                    <p class="text-muted mb-0">No cast information available.</p>
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card mb-3">
+            <div class="card-header fw-bold">Audio &amp; Subtitles</div>
+            <div class="card-body">
+                <h6 class="text-muted">Audio Tracks</h6>
+                @if (!string.IsNullOrEmpty(Model.Dvd.AudioTracks))
+                {
+                    <p>@Model.Dvd.AudioTracks</p>
+                }
+                else
+                {
+                    <p class="text-muted">—</p>
+                }
+
+                <h6 class="text-muted">Subtitles</h6>
+                @if (!string.IsNullOrEmpty(Model.Dvd.Subtitles))
+                {
+                    <p>@Model.Dvd.Subtitles</p>
+                }
+                else
+                {
+                    <p class="text-muted">—</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card mb-3">
+    <div class="card-header fw-bold">Purchase Info</div>
+    <div class="card-body">
+        <dl class="row mb-0">
+            <dt class="col-sm-2">Date</dt>
+            <dd class="col-sm-4">@(Model.Dvd.PurchaseDate ?? "—")</dd>
+            <dt class="col-sm-2">Price</dt>
+            <dd class="col-sm-4">
+                @(Model.Dvd.PurchasePrice.HasValue ? $"${Model.Dvd.PurchasePrice:F2}" : "—")
+            </dd>
+            <dt class="col-sm-2">Place</dt>
+            <dd class="col-sm-4">@(Model.Dvd.PurchasePlace ?? "—")</dd>
+            <dt class="col-sm-2">Wish Priority</dt>
+            <dd class="col-sm-4">@(Model.Dvd.WishPriority?.ToString() ?? "—")</dd>
+        </dl>
+    </div>
+</div>
+
+@if (!string.IsNullOrEmpty(Model.Dvd.LastEdited))
+{
+    <p class="text-muted small">Last edited: @Model.Dvd.LastEdited</p>
+}
+
+<a asp-page="./Collection" class="btn btn-outline-secondary">&larr; Back to Collection</a>

@@ -1,0 +1,15 @@
+[
+  {
+    "Name": "New Profile",
+    "Projects": [
+      {
+        "Path": "DVDCollectRAPI\\DVDCollectRAPI.csproj",
+        "Action": "Start"
+      },
+      {
+        "Path": "DVDCollectRWeb\\DVDCollectRWeb.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]
