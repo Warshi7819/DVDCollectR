@@ -24,6 +24,18 @@ public class DetailsModel : PageModel
     public bool HasFrontCover { get; private set; }
     public bool HasBackCover { get; private set; }
 
+    [BindProperty(SupportsGet = true)]
+    public int ReturnPage { get; set; } = 1;
+
+    [BindProperty(SupportsGet = true)]
+    public string? ReturnTitle { get; set; }
+
+    [BindProperty(SupportsGet = true)]
+    public string? ReturnActor { get; set; }
+
+    [BindProperty(SupportsGet = true)]
+    public string? ReturnGenre { get; set; }
+
     public async Task<IActionResult> OnGetAsync(int id)
     {
         var dvd = await _api.GetByIdAsync(id);

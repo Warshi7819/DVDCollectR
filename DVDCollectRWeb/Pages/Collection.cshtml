@@ -48,7 +48,13 @@
             @foreach (var dvd in Model.Result.Items)
             {
                 <tr>
-                    <td><a asp-page="./Details" asp-route-id="@dvd.Id">@dvd.Title</a></td>
+                    <td>
+                        <a asp-page="./Details" asp-route-id="@dvd.Id"
+                           asp-route-returnPage="@Model.CurrentPage"
+                           asp-route-returnTitle="@Model.SearchTitle"
+                           asp-route-returnActor="@Model.SearchActor"
+                           asp-route-returnGenre="@Model.SearchGenre">@dvd.Title</a>
+                    </td>
                     <td>@dvd.ProductionYear</td>
                     <td>@string.Join(", ", dvd.Genres)</td>
                     <td>@dvd.Rating</td>
