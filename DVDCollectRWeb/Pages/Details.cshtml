@@ -228,7 +228,7 @@
 
 @if (!string.IsNullOrEmpty(Model.Dvd.LastEdited))
 {
-    <p class="text-muted small">Last edited: @Model.Dvd.LastEdited</p>
+    <p class="text-muted small">Last edited: <time datetime="@Model.Dvd.LastEdited">@Model.Dvd.LastEdited</time></p>
 }
 
 <a asp-page="./Collection" class="btn btn-outline-secondary"

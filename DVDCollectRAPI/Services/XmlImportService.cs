@@ -108,7 +108,7 @@ public class XmlImportService : IHostedService
                     ? pd.ToString("yyyy-MM-dd")
                     : null,
             PurchasePrice = source.PurchaseInfo?.PurchasePrice?.Value,
-            PurchasePlace = source.PurchaseInfo?.PurchasePlace?.ToString(),
+            PurchasePlace = source.PurchaseInfo?.PurchasePlace is string placeStr ? placeStr : null,
             WishPriority = source.WishPriority != 0 ? source.WishPriority : null,
             LastEdited = source.LastEdited != default ? source.LastEdited.ToString("O") : null,
         };

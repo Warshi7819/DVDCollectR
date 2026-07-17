@@ -4,6 +4,13 @@
 // Write your JavaScript code.
 
 document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('time[datetime]').forEach(function (el) {
+    var d = new Date(el.getAttribute('datetime'));
+    if (!isNaN(d.getTime())) {
+      el.textContent = d.toLocaleString(undefined, { dateStyle: 'long', timeStyle: 'short' });
+    }
+  });
+
   document.querySelectorAll('.clickable-cover').forEach(function (img) {
     img.addEventListener('click', function () {
       document.getElementById('coverModalImage').src = this.src;
