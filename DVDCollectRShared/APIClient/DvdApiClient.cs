@@ -61,14 +61,6 @@ public class DvdApiClient
         return await response.Content.ReadFromJsonAsync<DvdResponse>(JsonOptions);
     }
 
-    public async Task<DvdResponse> CreateAsync(CreateDvdRequest request)
-    {
-        var response = await _http.PostAsJsonAsync("/api/dvds", request, JsonOptions);
-        response.EnsureSuccessStatusCode();
-
-        return await response.Content.ReadFromJsonAsync<DvdResponse>(JsonOptions)
-            ?? throw new InvalidOperationException("API returned success but no content.");
-    }
 
     public async Task<List<string>> GetGenresAsync()
     {
