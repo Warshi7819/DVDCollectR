@@ -15,11 +15,11 @@
     <div class="col-md-4 col-lg-3 mb-3">
         @if (Model.HasFrontCover)
         {
-            <img src="@Model.FrontCoverPath" class="img-fluid mb-2" alt="Front cover" />
+            <img src="@Model.FrontCoverPath" class="img-fluid mb-2" alt="Front cover" style="width: 70%;" />
         }
         @if (Model.HasBackCover)
         {
-            <img src="@Model.BackCoverPath" class="img-fluid" alt="Back cover" />
+            <img src="@Model.BackCoverPath" class="img-fluid" alt="Back cover" style="width: 70%;" />
         }
         @if (!Model.HasFrontCover && !Model.HasBackCover)
         {
@@ -57,7 +57,7 @@
 
         <div class="row">
             <div class="col-md-6">
-                <div class="card mb-3">
+                <div class="card mb-3 h-100">
                     <div class="card-header fw-bold">Details</div>
                     <div class="card-body">
                         <dl class="row mb-0">
@@ -110,7 +110,7 @@
             </div>
 
             <div class="col-md-6">
-                <div class="card mb-3">
+                <div class="card mb-3 h-100">
                     <div class="card-header fw-bold">Media Info</div>
                     <div class="card-body">
                         <dl class="row mb-0">
