@@ -27,13 +27,19 @@ public class DvdsController : ControllerBase
         var query = _db.DVDs.Include(d => d.Genres).AsQueryable();
 
         if (!string.IsNullOrWhiteSpace(title))
+        {
             query = query.Where(d => EF.Functions.Like(d.Title, $"%{title}%"));
+        }
 
         if (!string.IsNullOrWhiteSpace(actor))
+        {
             query = query.Where(d => d.Actors != null && EF.Functions.Like(d.Actors, $"%{actor}%"));
+        }
 
         if (!string.IsNullOrWhiteSpace(genre))
+        {
             query = query.Where(d => d.Genres.Any(g => EF.Functions.Like(g.Name, genre)));
+        }
 
         var totalCount = await query.CountAsync();
 
@@ -57,7 +63,9 @@ public class DvdsController : ControllerBase
     {
         var dvd = await _db.DVDs.Include(d => d.Genres).FirstOrDefaultAsync(d => d.Id == id);
         if (dvd == null)
+        {
             return NotFound();
+        }
 
         return MapToResponse(dvd);
     }
@@ -104,7 +112,10 @@ public class DvdsController : ControllerBase
             var existingGenres = await _db.Genres.ToListAsync();
             foreach (var name in request.Genres)
             {
-                if (string.IsNullOrWhiteSpace(name)) continue;
+                if (string.IsNullOrWhiteSpace(name))
+                {
+                    continue;
+                }
                 var trimmed = name.Trim();
                 var genre = existingGenres.FirstOrDefault(g =>
                     g.Name.Equals(trimmed, StringComparison.OrdinalIgnoreCase));

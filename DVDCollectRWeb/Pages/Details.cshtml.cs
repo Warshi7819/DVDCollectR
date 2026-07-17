@@ -28,7 +28,9 @@ public class DetailsModel : PageModel
     {
         var dvd = await _api.GetByIdAsync(id);
         if (dvd is null)
+        {
             return NotFound();
+        }
 
         Dvd = dvd;
 

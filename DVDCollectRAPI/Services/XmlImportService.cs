@@ -25,7 +25,9 @@ public class XmlImportService : IHostedService
 
         var xmlPath = Path.Combine(_env.ContentRootPath, "Data", "Collection.xml");
         if (!File.Exists(xmlPath))
+        {
             return;
+        }
 
         var serializer = new XmlSerializer(typeof(Collection));
         Collection collection;
@@ -64,7 +66,9 @@ public class XmlImportService : IHostedService
             var genres = ResolveGenres(dvd.Genres, genreCache);
             entity.Genres.Clear();
             foreach (var g in genres)
+            {
                 entity.Genres.Add(g);
+            }
         }
 
         await db.SaveChangesAsync(cancellationToken);
@@ -115,11 +119,17 @@ public class XmlImportService : IHostedService
     private static List<GenreEntity> ResolveGenres(string[]? sourceGenres, Dictionary<string, GenreEntity> cache)
     {
         var result = new List<GenreEntity>();
-        if (sourceGenres == null) return result;
+        if (sourceGenres == null)
+        {
+            return result;
+        }
 
         foreach (var name in sourceGenres)
         {
-            if (string.IsNullOrWhiteSpace(name)) continue;
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                continue;
+            }
             var trimmed = name.Trim();
             if (!cache.TryGetValue(trimmed, out var genre))
             {
@@ -134,17 +144,32 @@ public class XmlImportService : IHostedService
 
     private static string? FormatMediaTypes(CollectionDVDMediaTypes? mt)
     {
-        if (mt == null) return null;
+        if (mt == null)
+        {
+            return null;
+        }
         var types = new List<string>();
-        if (mt.DVD) types.Add("DVD");
-        if (mt.HDDVD) types.Add("HD DVD");
-        if (mt.BluRay) types.Add("Blu-ray");
+        if (mt.DVD)
+        {
+            types.Add("DVD");
+        }
+        if (mt.HDDVD)
+        {
+            types.Add("HD DVD");
+        }
+        if (mt.BluRay)
+        {
+            types.Add("Blu-ray");
+        }
         return types.Count > 0 ? string.Join(", ", types) : null;
     }
 
     private static string? ExtractDirector(CollectionDVDCredits? credits)
     {
-        if (credits?.Items == null) return null;
+        if (credits?.Items == null)
+        {
+            return null;
+        }
         foreach (var item in credits.Items)
         {
             if (item is CollectionDVDCreditsCredit credit &&
@@ -159,7 +184,10 @@ public class XmlImportService : IHostedService
 
     private static string? FormatActors(CollectionDVDActors? actors)
     {
-        if (actors?.Items == null) return null;
+        if (actors?.Items == null)
+        {
+            return null;
+        }
         var list = new List<string>();
         foreach (var item in actors.Items)
         {
@@ -170,9 +198,13 @@ public class XmlImportService : IHostedService
                     .Where(p => !string.IsNullOrEmpty(p)));
 
                 if (!string.IsNullOrEmpty(actor.Role))
+                {
                     list.Add($"{name} ({actor.Role})");
+                }
                 else
+                {
                     list.Add(name);
+                }
             }
         }
         return list.Count > 0 ? string.Join(", ", list) : null;
@@ -180,14 +212,19 @@ public class XmlImportService : IHostedService
 
     private static string? FormatAudioTracks(CollectionDVDAudioTrack[]? tracks)
     {
-        if (tracks == null || tracks.Length == 0) return null;
+        if (tracks == null || tracks.Length == 0)
+        {
+            return null;
+        }
         var list = new List<string>();
         foreach (var t in tracks)
         {
             var parts = new[] { t.AudioContent, t.AudioFormat, t.AudioChannels };
             var desc = string.Join(" / ", parts.Where(p => !string.IsNullOrEmpty(p)));
             if (!string.IsNullOrEmpty(desc))
+            {
                 list.Add(desc);
+            }
         }
         return list.Count > 0 ? string.Join("; ", list) : null;
     }

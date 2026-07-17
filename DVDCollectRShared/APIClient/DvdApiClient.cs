@@ -28,11 +28,17 @@ public class DvdApiClient
         };
 
         if (!string.IsNullOrWhiteSpace(title))
+        {
             queryParams.Add($"title={Uri.EscapeDataString(title)}");
+        }
         if (!string.IsNullOrWhiteSpace(actor))
+        {
             queryParams.Add($"actor={Uri.EscapeDataString(actor)}");
+        }
         if (!string.IsNullOrWhiteSpace(genre))
+        {
             queryParams.Add($"genre={Uri.EscapeDataString(genre)}");
+        }
 
         var response = await _http.GetAsync($"/api/dvds?{string.Join("&", queryParams)}");
         response.EnsureSuccessStatusCode();
@@ -46,7 +52,9 @@ public class DvdApiClient
         var response = await _http.GetAsync($"/api/dvds/{id}");
 
         if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+        {
             return null;
+        }
 
         response.EnsureSuccessStatusCode();
 
