@@ -30,6 +30,11 @@ body {
   text-align: start;
 }
 
+.card-img-left {
+    border-top-left-radius: var(--bs-card-inner-border-radius);
+    border-bottom-left-radius: var(--bs-card-inner-border-radius);
+}
+
 .clickable-cover {
   cursor: pointer;
   transition: opacity 0.15s ease-in-out;
