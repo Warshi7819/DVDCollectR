@@ -47,4 +47,5 @@ public class DvdEntity
     public string UpdatedAt { get; set; } = DateTime.UtcNow.ToString("O");
 
     public ICollection<GenreEntity> Genres { get; set; } = [];
+    public TmdbEntity? Tmdb { get; set; }
 }

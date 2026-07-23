@@ -35,5 +35,11 @@ public class DvdResponse
     public string CreatedAt { get; set; } = string.Empty;
     public string UpdatedAt { get; set; } = string.Empty;
     public List<string> Genres { get; set; } = [];
+
+    public string? TmdbPosterPath { get; set; }
+    public double? TmdbVoteAverage { get; set; }
+    public int? TmdbVoteCount { get; set; }
+    public string? TmdbOverview { get; set; }
+    public DateTime? TmdbLastUpdated { get; set; }
 }
 

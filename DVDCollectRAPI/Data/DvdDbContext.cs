@@ -8,6 +8,8 @@ public class DvdDbContext : DbContext
 
     public DbSet<DvdEntity> DVDs => Set<DvdEntity>();
     public DbSet<GenreEntity> Genres => Set<GenreEntity>();
+    public DbSet<TmdbEntity> Tmdb => Set<TmdbEntity>();
+    public DbSet<AppSettingEntity> AppSettings => Set<AppSettingEntity>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -20,5 +22,13 @@ public class DvdDbContext : DbContext
             .HasMany(d => d.Genres)
             .WithMany(g => g.DVDs)
             .UsingEntity(t => t.ToTable("DVDGenres"));
+
+        modelBuilder.Entity<TmdbEntity>(entity =>
+        {
+            entity.HasOne(t => t.Dvd)
+                .WithOne(d => d.Tmdb)
+                .HasForeignKey<TmdbEntity>(t => t.DvdId)
+                .OnDelete(DeleteBehavior.Cascade);
+        });
     }
 }

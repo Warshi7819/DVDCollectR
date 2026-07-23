@@ -1,0 +1,160 @@
+@page
+@model DVDCollectRWeb.Pages.SettingsModel
+@using System.Text.Json
+@{
+    ViewData["Title"] = "Settings";
+    var initialStatusJson = JsonSerializer.Serialize(Model.SyncStatus, new JsonSerializerOptions
+    {
+        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+    });
+}
+<h2 class="mb-4">Settings</h2>
+
+@if (TempData["Saved"] is string savedMsg)
+{
+    <div class="alert alert-success">@savedMsg</div>
+}
+
+@if (Model.ErrorMessage is string errMsg)
+{
+    <div class="alert alert-danger">@errMsg</div>
+}
+
+<form method="post" asp-page-handler="SaveKey" class="mb-4">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="mb-0">TMDB API Key</h5>
+        </div>
+        <div class="card-body">
+            <div class="mb-3 row">
+                <label for="ApiKey" class="col-sm-3 col-form-label">API Key</label>
+                <div class="col-sm-6">
+                    <div class="input-group">
+                        <input type="password" class="form-control" id="ApiKey" name="ApiKey" value="@Model.ApiKey" placeholder="Enter your TMDB API key" />
+                        <button class="btn btn-outline-secondary" type="button" id="toggleKey" onclick="toggleApiKey()">Show</button>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Save Key</button>
+        </div>
+    </div>
+</form>
+
+<div class="card">
+    <div class="card-header">
+        <h5 class="mb-0">TMDB Data Sync</h5>
+    </div>
+    <div class="card-body">
+        <p class="text-muted">Searches TMDB for each DVD that has missing or outdated (over 30 days old) data. Limited to 2 requests per minute.</p>
+
+        <button id="startSyncBtn" class="btn btn-success mb-3" onclick="startSync()">Start Sync</button>
+
+        <div id="syncProgress" class="mb-3" style="display:none">
+            <div class="d-flex justify-content-between mb-1">
+                <span id="syncStatusText">Idle</span>
+                <span id="syncCountText">0 / 0</span>
+            </div>
+            <div class="progress" role="progressbar">
+                <div id="syncProgressBar" class="progress-bar progress-bar-striped progress-bar-animated" style="width:0%"></div>
+            </div>
+            <small id="syncCurrentTitle" class="text-muted"></small>
+        </div>
+
+        <div id="syncError" class="alert alert-danger" style="display:none"></div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        const initialStatus = @Html.Raw(initialStatusJson);
+        let syncPollInterval = null;
+
+        function toggleApiKey() {
+            const input = document.getElementById('ApiKey');
+            const btn = document.getElementById('toggleKey');
+            if (input.type === 'password') {
+                input.type = 'text';
+                btn.textContent = 'Hide';
+            } else {
+                input.type = 'password';
+                btn.textContent = 'Show';
+            }
+        }
+
+        async function startSync() {
+            const btn = document.getElementById('startSyncBtn');
+            btn.disabled = true;
+            document.getElementById('syncError').style.display = 'none';
+            document.getElementById('syncProgress').style.display = 'block';
+
+            try {
+                const response = await fetch('?handler=StartSync', {
+                    method: 'POST',
+                    headers: { 'RequestVerificationToken': getAntiXsrfToken() }
+                });
+                if (!response.ok) {
+                    showSyncError('Failed to start sync');
+                    btn.disabled = false;
+                    return;
+                }
+                const data = await response.json();
+                updateSyncUI(data);
+                pollSyncStatus();
+            } catch (e) {
+                showSyncError('Network error: ' + e.message);
+                btn.disabled = false;
+            }
+        }
+
+        function pollSyncStatus() {
+            if (syncPollInterval) clearInterval(syncPollInterval);
+
+            syncPollInterval = setInterval(async () => {
+                try {
+                    const response = await fetch('?handler=SyncStatus');
+                    const data = await response.json();
+                    updateSyncUI(data);
+
+                    if (data.status === 'Idle' || data.status === 'Completed') {
+                        clearInterval(syncPollInterval);
+                        syncPollInterval = null;
+                        document.getElementById('startSyncBtn').disabled = false;
+                    }
+                } catch (e) {
+                    console.error('Poll error:', e);
+                }
+            }, 12000);
+        }
+
+        function updateSyncUI(data) {
+            document.getElementById('syncStatusText').textContent = data.status;
+            document.getElementById('syncCountText').textContent = data.completed + ' / ' + data.total;
+
+            const pct = data.total > 0 ? Math.round((data.completed / data.total) * 100) : 0;
+            document.getElementById('syncProgressBar').style.width = pct + '%';
+            document.getElementById('syncProgressBar').setAttribute('aria-valuenow', pct);
+
+            document.getElementById('syncCurrentTitle').textContent = data.currentTitle || '';
+        }
+
+        function showSyncError(msg) {
+            const el = document.getElementById('syncError');
+            el.textContent = msg;
+            el.style.display = 'block';
+        }
+
+        function getAntiXsrfToken() {
+            const token = document.querySelector('input[name="__RequestVerificationToken"]');
+            return token ? token.value : '';
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (initialStatus.status === 'Running') {
+                document.getElementById('syncProgress').style.display = 'block';
+                document.getElementById('startSyncBtn').disabled = true;
+                updateSyncUI(initialStatus);
+                pollSyncStatus();
+            }
+        });
+    </script>
+}

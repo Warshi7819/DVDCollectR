@@ -57,7 +57,17 @@
                 {
                     var hrs = dvd.RunningTime.Value / 60;
                     var mins = dvd.RunningTime.Value % 60;
-                    <p class="card-text small mb-2"><strong>Runtime:</strong> @(hrs)h @(mins)m</p>
+                    <p class="card-text small mb-1"><strong>Runtime:</strong> @(hrs)h @(mins)m</p>
+                }
+                @if (dvd.TmdbVoteAverage.HasValue)
+                {
+                    <p class="card-text small mb-2">
+                        <span class="badge bg-warning text-dark">★ @dvd.TmdbVoteAverage.Value.ToString("F1")</span>
+                        @if (dvd.TmdbVoteCount.HasValue)
+                        {
+                            <small class="text-muted ms-1">@dvd.TmdbVoteCount.Value.ToString("N0") votes</small>
+                        }
+                    </p>
                 }
                 <div class="mt-auto">
                     @foreach (var genre in dvd.Genres)

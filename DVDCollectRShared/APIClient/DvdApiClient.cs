@@ -70,4 +70,50 @@ public class DvdApiClient
         return await response.Content.ReadFromJsonAsync<List<string>>(JsonOptions)
             ?? [];
     }
+
+    public async Task<TmdbSyncStatus> StartTmdbSyncAsync()
+    {
+        var response = await _http.PostAsync("/api/tmdb/sync/start", null);
+        response.EnsureSuccessStatusCode();
+        return await response.Content.ReadFromJsonAsync<TmdbSyncStatus>(JsonOptions)
+            ?? new TmdbSyncStatus();
+    }
+
+    public async Task<TmdbSyncStatus> GetTmdbSyncStatusAsync()
+    {
+        var response = await _http.GetAsync("/api/tmdb/sync/status");
+        response.EnsureSuccessStatusCode();
+        return await response.Content.ReadFromJsonAsync<TmdbSyncStatus>(JsonOptions)
+            ?? new TmdbSyncStatus();
+    }
+
+    public async Task<TmdbApiKeyResponse> GetTmdbApiKeyAsync()
+    {
+        var response = await _http.GetAsync("/api/tmdb/settings/key");
+        await EnsureSuccessOrThrowAsync(response);
+        return await response.Content.ReadFromJsonAsync<TmdbApiKeyResponse>(JsonOptions)
+            ?? new TmdbApiKeyResponse();
+    }
+
+    public async Task SetTmdbApiKeyAsync(string key)
+    {
+        var response = await _http.PutAsJsonAsync("/api/tmdb/settings/key", new { key });
+        await EnsureSuccessOrThrowAsync(response);
+    }
+
+    private static async Task EnsureSuccessOrThrowAsync(HttpResponseMessage response)
+    {
+        if (!response.IsSuccessStatusCode)
+        {
+            var body = await response.Content.ReadAsStringAsync();
+            throw new HttpRequestException(
+                $"Response status code does not indicate success: {(int)response.StatusCode} ({response.ReasonPhrase}). Body: {body}");
+        }
+    }
+}
+
+public class TmdbApiKeyResponse
+{
+    public string? Key { get; set; }
+    public bool HasKey { get; set; }
 }

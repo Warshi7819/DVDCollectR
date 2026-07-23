@@ -3,6 +3,7 @@ using System;
 using DVDCollectRAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DVDCollectRAPI.Migrations
 {
     [DbContext(typeof(DvdDbContext))]
-    partial class DvdDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260723092323_AddTmdbAndAppSettings")]
+    partial class AddTmdbAndAppSettings
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "10.0.10");

@@ -24,7 +24,7 @@ public class DvdsController : ControllerBase
         [FromQuery] int page = 1,
         [FromQuery] int pageSize = 10)
     {
-        var query = _db.DVDs.Include(d => d.Genres).AsQueryable();
+        var query = _db.DVDs.Include(d => d.Genres).Include(d => d.Tmdb).AsQueryable();
 
         if (!string.IsNullOrWhiteSpace(title))
         {
@@ -61,7 +61,7 @@ public class DvdsController : ControllerBase
     [HttpGet("{id:int}")]
     public async Task<ActionResult<DvdResponse>> GetById(int id)
     {
-        var dvd = await _db.DVDs.Include(d => d.Genres).FirstOrDefaultAsync(d => d.Id == id);
+        var dvd = await _db.DVDs.Include(d => d.Genres).Include(d => d.Tmdb).FirstOrDefaultAsync(d => d.Id == id);
         if (dvd == null)
         {
             return NotFound();
@@ -108,6 +108,11 @@ public class DvdsController : ControllerBase
             CreatedAt = entity.CreatedAt,
             UpdatedAt = entity.UpdatedAt,
             Genres = entity.Genres.Select(g => g.Name).OrderBy(n => n).ToList(),
+            TmdbPosterPath = entity.Tmdb?.PosterPath,
+            TmdbVoteAverage = entity.Tmdb?.VoteAverage,
+            TmdbVoteCount = entity.Tmdb?.VoteCount,
+            TmdbOverview = entity.Tmdb?.Overview,
+            TmdbLastUpdated = entity.Tmdb?.LastUpdated,
         };
     }
 }
