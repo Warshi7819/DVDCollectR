@@ -27,6 +27,7 @@ There's also a **Thumbnails** directory under the Images folder that contains sm
 Even though the data exported from DVD Profiler is the foundation of this project (no data, no fun) this GitHub project is of course all about the Web App. And since I also discovered that DVD Profiler is still alive and kicking, **AND** that my license from 2009 is still valid on the latest version from 2017, this project focuses on the __display__ of my collection. I will still continue to use [DVD Profiler](http://www.invelos.com/) to keep my collection up to date. 
 
 Anyways, let's dive into the details:
+<p align="center"><img src="DVDCollectRWeb/Design/DVDCollectR.png" height="400px" /></p>
 
 ### Architecture
 
