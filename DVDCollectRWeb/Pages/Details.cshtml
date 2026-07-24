@@ -15,11 +15,11 @@
     <div class="col-md-4 col-lg-3 mb-3">
         @if (Model.HasFrontCover)
         {
-            <img src="@Model.FrontCoverPath" class="img-fluid mb-2 clickable-cover" alt="Front cover" style="width: 70%;" />
+            <img src="@Model.FrontCoverPath" class="img-fluid mb-2 clickable-cover" alt="Front cover" />
         }
         @if (Model.HasBackCover)
         {
-            <img src="@Model.BackCoverPath" class="img-fluid clickable-cover" alt="Back cover" style="width: 70%;" />
+            <img src="@Model.BackCoverPath" class="img-fluid clickable-cover" alt="Back cover" />
         }
         @if (!Model.HasFrontCover && !Model.HasBackCover)
         {

@@ -38,6 +38,13 @@ body {
 .clickable-cover {
   cursor: pointer;
   transition: opacity 0.15s ease-in-out;
+  width: 50%;
+}
+
+@media (min-width: 768px) {
+  .clickable-cover {
+    width: 70%;
+  }
 }
 
 .clickable-cover:hover {
