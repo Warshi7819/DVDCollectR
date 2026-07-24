@@ -47,7 +47,7 @@ Since I have been using [The Movie Database](https://www.themoviedb.org/) for ag
 
 <img src="DVDCollectRWeb/Screenshots/Settings.png" height="400px" />
 
-To get an API key for free you just need to register a user on their page. Once the data is fetched you will see Average Vote and number of votes in the results - in this case an average of 8.2 of 10 of a total of 14 506 votes:
+To get an API key for free you just need to register a user on their page. Once the data is fetched you will see the average vote and number of votes in the results - in this case an average of 8.2 of 10 of a total of 14 506 votes:
 
 <img src="DVDCollectRWeb/Screenshots/ratings.png" width="400px" />
 
