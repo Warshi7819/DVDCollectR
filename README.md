@@ -233,7 +233,7 @@ To run the solution in development you just have to ensure that both the API and
 Want to bring this to production? I'm currently running this as two seperate services on Ubuntu (API and Web) then I use a Cloudflare tunnel to expose my Web Application to the public internet. I'm not going to detail this here and don't ask me to do it either. Do your own research on what's good and safe here. 
 
 ### Built In Collaboration With AI
-I'll just throw in a small disclamer: ~90% of this was built using AI (OpenCode with DeepSeek V4 Flash, and MiMo v.2.5). The structure of the project (API, Web, Shared), the authentication, a few pages with basic navigation and the classes needed to read the Collection.xml file I had already setup before I let AI loose. But one of the side goals of this project was to push these two AI models to the max to see what they could do. 
+I'll just throw in a disclamer: ~90% of this was built using AI (OpenCode with DeepSeek V4 Flash, and MiMo v.2.5). The structure of the project (API, Web, Shared), the authentication, a few pages with basic navigation and the classes needed to read the Collection.xml file I had already setup before I let AI loose. But one of the side goals of this project was to push these two AI models to the max to see what they could do. 
 
 The experience was mostly good except for one rabbit hole where the AI model (DeepSeek) insisted on good error handling and fallbacks instead of fixing the core issue (why the DB migration failed in the first place). This was kinda funny and frustrating at the same time :) After some yelling at the model and re-focus we got there in the end. But if you do not catch situations like this it can "spin out of control" generating wast amounts of code that isn't necessary. 
 
