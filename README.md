@@ -13,6 +13,7 @@ So, back in April 2009 I bougth a license for [DVD Profiler](http://www.invelos.
 Luckily exporting the data from DVD Profiler to XML is quite easy. You'll find the option under **File** -> **Export Profile Database...**. Just accept the default and save everything as a Collection.xml file. Remember, you can use this data as long as it's for your personal use.
 
 We now have the metadata for all our DVD's. Then we need to find the back and front cover images. These are situated on Windows under your home directory:
+
 %USERPROFILE%\Documents\DVD Profiler\Databases\Default\Images
 
 The images are stored with the id of the profile they belong to, with a trailing **f** for front or **b** for back. E.g.
@@ -32,6 +33,22 @@ Even though the data exported from DVD Profiler is the foundation of this projec
 ...
 
 ## Development
+### Setup Solution In Visual Studio 2026
+I used Visual Studio 2026 for this project. Clone this repo (entire solution). Then we need to copy in the data we extracted from DVD Profiler.
+Collection.xml file should be copied to: 
+* DVDCollectR\DVDCollectRAPI\Data\Collection.xml
+
+Then we need to copy in the cover images to make the application shine:
+* %USERPROFILE%\Documents\DVD Profiler\Databases\Default\Images\ *
+* Including the Thumbnails sub folder is copied to:
+* DVDCollectR\DVDCollectRWeb\wwwroot\images\DVDs\
+
+E.g. the image we discussed above 044005939026.2f.jpg should be found here DVDCollectR\DVDCollectRWeb\wwwroot\images\DVDs\044005939026.2f.jpg once copying is done.  
+
+To run the solution in development you just have to ensure that both the API and the Web project is started up as the latter depends on the prior. 
+
+Want to bring this to production? I'm currently running this as two seperate services on Ubuntu (API and Web) then I use a Cloudflare tunnel to expose my Web Application to the public internet. I'm not going to detail this here and don't ask me to do it either. Do your own research on what's good and safe here. 
+
 ### Built Using AI
 I'll just throw in a small disclamer: ~90% of this was built using AI (OpenCode with DeepSeek V4 Flash, and MiMo v.2.5). The structure of the project (API, Web, Shared), the authentication, a few pages with basic navigation and the classes needed to read the Collection.xml file I had already setup before I let AI loose. 
 
