@@ -108,6 +108,7 @@ public class DvdsController : ControllerBase
             CreatedAt = entity.CreatedAt,
             UpdatedAt = entity.UpdatedAt,
             Genres = entity.Genres.Select(g => g.Name).OrderBy(n => n).ToList(),
+            TmdbId = entity.Tmdb?.TmdbId,
             TmdbPosterPath = entity.Tmdb?.PosterPath,
             TmdbVoteAverage = entity.Tmdb?.VoteAverage,
             TmdbVoteCount = entity.Tmdb?.VoteCount,

@@ -152,6 +152,7 @@ public class TmdbSyncService : BackgroundService
 
             if (movie != null)
             {
+                existing.TmdbId = movie.Id;
                 existing.PosterPath = movie.PosterPath;
                 existing.VoteAverage = movie.VoteAverage;
                 existing.VoteCount = movie.VoteCount;
@@ -159,6 +160,7 @@ public class TmdbSyncService : BackgroundService
             }
             else
             {
+                existing.TmdbId = null;
                 existing.PosterPath = null;
                 existing.VoteAverage = null;
                 existing.VoteCount = null;
@@ -210,6 +212,9 @@ public class TmdbSyncService : BackgroundService
 
     private sealed class TmdbMovie
     {
+        [JsonPropertyName("id")]
+        public int? Id { get; set; }
+
         [JsonPropertyName("poster_path")]
         public string? PosterPath { get; set; }
 

@@ -17,6 +17,8 @@ public class TmdbEntity
 
     public string? Overview { get; set; }
 
+    public int? TmdbId { get; set; }
+
     public DateTime? LastUpdated { get; set; }
 
     public DvdEntity Dvd { get; set; } = null!;
