@@ -1,5 +1,8 @@
 # DVDCollectR
-A Web Application that enables you to import your DVD Collection from DVD Profiler (Invelos Software) and make it available as - you will never guess this - a Web Application. 
+A Web Application that enables you to import your DVD Collection from [DVD Profiler](http://www.invelos.com/) and make it available as - you will never guess this - a Web Application. 
+
+sales pictures go here ;)
+
 
 ## DVD Profiler - Getting Your Data
 So, back in April 2009 I bougth a license for DVD Profiler and between 2009 and 2012 I cataloged my collection of 453 DVD's. This year I started to wonder if it was possible to:
@@ -20,4 +23,10 @@ The images are stored with the id of the profile they belong to, with a trailing
 There's also a **Thumbnails** directory under the Images folder that contains smaller Thumbnail friendly versions of all the images using the same naming convention. 
 
 ## DVD CollectR - The Web App
-Even though the data exported from DVD Profiler is the foundation of this project (no data, no fun) this GitHub project is of course all about the Web App. 
+Even though the data exported from DVD Profiler is the foundation of this project (no data, no fun) this GitHub project is of course all about the Web App. And since I also discovered that DVD Profiler is still alive and kicking, **AND** that my license from 2009 is still valid on the latest version from 2017, this project focuses on the __display__ of my collection. I will still continue to use [DVD Profiler](http://www.invelos.com/) to keep my collection up to date. 
+
+
+
+
+
+
