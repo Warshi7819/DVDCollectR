@@ -2,7 +2,18 @@
 
 A Web Application that enables you to import your DVD Collection from [DVD Profiler](http://www.invelos.com/) and make it available as - you will never guess this - a Web Application. 
 
-* sales pictures go here ;)
+<table>
+  <tr>
+    <th><img src="DVDCollectRWeb/Screenshots/Collection.png" width="200px" /></th>
+    <th><img src="DVDCollectRWeb/Screenshots/Details.png" width="200px" /></th>
+    <th><img src="DVDCollectRWeb/Screenshots/Details2.png" width="200px" /></th>
+  </tr>
+  <tr>
+    <td>Collection Overview</td>
+    <td>Item Details</td>
+    <td>Item Details - Cover Art Clicked</td>
+  </tr>
+</table>
 
 
 ## DVD Profiler - Getting Your Data
