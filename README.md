@@ -1,7 +1,7 @@
 # DVDCollectR
 A Web Application that enables you to import your DVD Collection from DVD Profiler (Invelos Software) and make it available as - you will never guess this - a Web Application. 
 
-## DVD Profiler
+## DVD Profiler - Getting Your Data
 So, back in April 2009 I bougth a license for DVD Profiler and between 2009 and 2012 I cataloged my collection of 453 DVD's. This year I started to wonder if it was possible to:
 * A: Rescue this data about my DVD collection from my old Acer Aspire One Netbook.
 * B: Create a Web App so that I could carry this collection with me and access it from my phone.
