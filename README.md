@@ -31,7 +31,7 @@ Anyways, let's dive into the details:
 
 ### Architecture
 
-All communication is **server-side**: Razor PageModels call `DvdApiClient` (defined in `DVDCollectRShared/APIClient/DvdApiClient.cs`) during `OnGet`/`OnPost` handlers. No client-side SPA — except the Settings page which uses `fetch()` to poll sync status every 12 seconds.
+All communication with the API is **server-side**: Razor PageModels call `DvdApiClient` (defined in `DVDCollectRShared/APIClient/DvdApiClient.cs`) during `OnGet`/`OnPost` handlers. No client-side SPA — except the Settings page which uses `fetch()` to poll sync status every 12 seconds.
 
 Cover images are served as **static files** from `wwwroot/images/DVDs/`, **not** from the API.
 
