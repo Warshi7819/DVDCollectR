@@ -32,7 +32,7 @@ Anyways, let's dive into the details:
 <img src="DVDCollectRWeb/Design/DVDCollectR.png" height="400px" />
 
 ### The Movie Database
-Since I have been using [The Movie Database](https://www.themoviedb.org/) for ages I decided to integrate data from this service so that I also get average user ratings/votes for each movie. This is done by the API in an background thread. All you need is to go to the Settings page on the Web App - insert your API Key and hit the Start Sync button. It will then lookup the movies one by one and get data like average vote and vote count. This information is then displayed with each individual result on the Collection page. 
+Since I have been using [The Movie Database](https://www.themoviedb.org/) for ages I decided to integrate data from this service so that I also get average user ratings/votes for each movie. This is done by the API in an background thread. All you need to do is go to the Settings page on the Web App - insert your API Key and hit the Start Sync button. It will then lookup the movies one by one and get data like average vote and vote count. This information is then displayed with each individual result on the Collection page. 
 
 <img src="DVDCollectRWeb/Screenshots/Settings.png" height="400px" />
 
