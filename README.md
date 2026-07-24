@@ -1,4 +1,4 @@
-<img src="DVDCollectRWeb/Images/logo-small.png" height="200px" />
+<img src="DVDCollectRWeb/Images/logo-small.png" width="200px" />
 
 A Web Application that enables you to import your DVD Collection from [DVD Profiler](http://www.invelos.com/) and make it available as - you will never guess this - a Web Application. 
 
