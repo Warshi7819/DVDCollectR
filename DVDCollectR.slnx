@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="README.md" />
+  </Folder>
   <Project Path="DVDCollectRAPI/DVDCollectRAPI.csproj" />
   <Project Path="DVDCollectRShared/DVDCollectRShared.csproj" />
   <Project Path="DVDCollectRWeb/DVDCollectRWeb.csproj" />
