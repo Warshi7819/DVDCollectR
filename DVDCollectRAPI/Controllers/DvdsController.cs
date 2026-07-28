@@ -28,7 +28,9 @@ public class DvdsController : ControllerBase
 
         if (!string.IsNullOrWhiteSpace(title))
         {
-            query = query.Where(d => EF.Functions.Like(d.Title, $"%{title}%"));
+            query = query.Where(d =>
+                EF.Functions.Like(d.Title, $"%{title}%") ||
+                (d.OriginalTitle != null && EF.Functions.Like(d.OriginalTitle, $"%{title}%")));
         }
 
         if (!string.IsNullOrWhiteSpace(actor))
