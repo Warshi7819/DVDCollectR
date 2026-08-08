@@ -1,12 +1,16 @@
 using DVDCollectRWeb.Configuration;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.Extensions.Options;
 using System.Security.Claims;
 
 namespace DVDCollectRWeb.Pages
 {
+    [AllowAnonymous]
+    [EnableRateLimiting("LoginPolicy")]
     public class LoginModel : PageModel
     {
 

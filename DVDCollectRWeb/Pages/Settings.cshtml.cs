@@ -1,12 +1,10 @@
 using System.Text.Json;
 using DVDCollectRShared.APIClient;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace DVDCollectRWeb.Pages;
 
-[Authorize]
 public class SettingsModel : PageModel
 {
     private readonly DvdApiClient _api;
