@@ -22,6 +22,7 @@ public class XmlImportService : IHostedService
         var db = scope.ServiceProvider.GetRequiredService<DvdDbContext>();
 
         await db.Database.MigrateAsync(cancellationToken);
+        await EnsureBuiltInThemesSeededAsync(db, cancellationToken);
 
         var xmlPath = Path.Combine(_env.ContentRootPath, "Data", "Collection.xml");
         if (!File.Exists(xmlPath))
@@ -75,6 +76,46 @@ public class XmlImportService : IHostedService
     }
 
     public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+
+    private static async Task EnsureBuiltInThemesSeededAsync(DvdDbContext db, CancellationToken cancellationToken)
+    {
+        if (await db.Themes.AnyAsync(cancellationToken))
+        {
+            return;
+        }
+
+        db.Themes.AddRange(
+            new ThemeEntity
+            {
+                Name = "Light",
+                IsBuiltIn = true,
+                BodyBg = "#ffffff",
+                BodyColor = "#212529",
+                CardBg = "#ffffff",
+                CardBorderColor = "rgba(0,0,0,0.125)",
+                PrimaryColor = "#0d6efd",
+                NavbarBg = "#0d6efd",
+                NavbarTextColor = "#ffffff",
+                FooterBg = "#f8f9fa",
+                MutedColor = "#6c757d"
+            },
+            new ThemeEntity
+            {
+                Name = "Dark",
+                IsBuiltIn = true,
+                BodyBg = "#212529",
+                BodyColor = "#dee2e6",
+                CardBg = "#343a40",
+                CardBorderColor = "#495057",
+                PrimaryColor = "#0d6efd",
+                NavbarBg = "#343a40",
+                NavbarTextColor = "#ffffff",
+                FooterBg = "#2b3035",
+                MutedColor = "#adb5bd"
+            });
+
+        await db.SaveChangesAsync(cancellationToken);
+    }
 
     private static DvdEntity Map(CollectionDVD source)
     {

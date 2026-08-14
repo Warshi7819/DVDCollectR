@@ -1,0 +1,25 @@
+@{
+    Layout = "/Pages/Shared/_Layout.cshtml";
+    var currentPage = ViewContext.RouteData.Values["page"]?.ToString();
+}
+
+<ul class="nav nav-pills mb-4">
+    <li class="nav-item">
+        <a class="nav-link @(currentPage == "/Settings/Tmdb" ? "active" : "")"
+           asp-page="/Settings/Tmdb">
+            <i class="bi bi-film me-1"></i>TMDB
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link @(currentPage == "/Settings/Themes" ? "active" : "")"
+           asp-page="/Settings/Themes">
+            <i class="bi bi-palette me-1"></i>Themes
+        </a>
+    </li>
+</ul>
+
+@RenderBody()
+
+@section Scripts {
+    @await RenderSectionAsync("Scripts", required: false)
+}

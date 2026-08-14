@@ -1,15 +1,13 @@
 @page
-@model DVDCollectRWeb.Pages.SettingsModel
+@model DVDCollectRWeb.Pages.Settings.TmdbModel
 @using System.Text.Json
 @{
-    ViewData["Title"] = "Settings";
+    ViewData["Title"] = "TMDB Settings";
     var initialStatusJson = JsonSerializer.Serialize(Model.SyncStatus, new JsonSerializerOptions
     {
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase
     });
 }
-<h2 class="mb-4">Settings</h2>
-
 @if (TempData["Saved"] is string savedMsg)
 {
     <div class="alert alert-success">@savedMsg</div>
@@ -21,7 +19,7 @@
 }
 
 <form method="post" asp-page-handler="SaveKey" class="mb-4">
-    <div class="card">
+    <div class="card shadow-sm">
         <div class="card-header">
             <h5 class="mb-0">TMDB API Key</h5>
         </div>
@@ -40,7 +38,7 @@
     </div>
 </form>
 
-<div class="card">
+<div class="card shadow-sm">
     <div class="card-header">
         <h5 class="mb-0">TMDB Data Sync</h5>
     </div>

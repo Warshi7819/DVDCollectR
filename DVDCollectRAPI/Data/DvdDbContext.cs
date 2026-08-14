@@ -10,6 +10,7 @@ public class DvdDbContext : DbContext
     public DbSet<GenreEntity> Genres => Set<GenreEntity>();
     public DbSet<TmdbEntity> Tmdb => Set<TmdbEntity>();
     public DbSet<AppSettingEntity> AppSettings => Set<AppSettingEntity>();
+    public DbSet<ThemeEntity> Themes => Set<ThemeEntity>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

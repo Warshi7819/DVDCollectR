@@ -3,19 +3,19 @@ using DVDCollectRShared.APIClient;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace DVDCollectRWeb.Pages;
+namespace DVDCollectRWeb.Pages.Settings;
 
-public class SettingsModel : PageModel
+public class TmdbModel : PageModel
 {
     private readonly DvdApiClient _api;
-    private readonly ILogger<SettingsModel> _logger;
+    private readonly ILogger<TmdbModel> _logger;
 
     private static readonly JsonSerializerOptions JsonOptions = new()
     {
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase
     };
 
-    public SettingsModel(DvdApiClient api, ILogger<SettingsModel> logger)
+    public TmdbModel(DvdApiClient api, ILogger<TmdbModel> logger)
     {
         _api = api;
         _logger = logger;

@@ -1,5 +1,6 @@
 using System.Net.Http.Json;
 using System.Text.Json;
+using DVDCollectRShared.Dtos;
 
 namespace DVDCollectRShared.APIClient;
 
@@ -98,6 +99,43 @@ public class DvdApiClient
     public async Task SetTmdbApiKeyAsync(string key)
     {
         var response = await _http.PutAsJsonAsync("/api/tmdb/settings/key", new { key });
+        await EnsureSuccessOrThrowAsync(response);
+    }
+
+    public async Task<List<ThemeDto>> GetThemesAsync()
+    {
+        var response = await _http.GetAsync("/api/themes");
+        await EnsureSuccessOrThrowAsync(response);
+        return await response.Content.ReadFromJsonAsync<List<ThemeDto>>(JsonOptions) ?? [];
+    }
+
+    public async Task<ThemeDto?> GetThemeAsync(int id)
+    {
+        var response = await _http.GetAsync($"/api/themes/{id}");
+        if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+        {
+            return null;
+        }
+        await EnsureSuccessOrThrowAsync(response);
+        return await response.Content.ReadFromJsonAsync<ThemeDto>(JsonOptions);
+    }
+
+    public async Task<ThemeDto?> CreateThemeAsync(ThemeDto dto)
+    {
+        var response = await _http.PostAsJsonAsync("/api/themes", dto);
+        await EnsureSuccessOrThrowAsync(response);
+        return await response.Content.ReadFromJsonAsync<ThemeDto>(JsonOptions);
+    }
+
+    public async Task UpdateThemeAsync(int id, ThemeDto dto)
+    {
+        var response = await _http.PutAsJsonAsync($"/api/themes/{id}", dto);
+        await EnsureSuccessOrThrowAsync(response);
+    }
+
+    public async Task DeleteThemeAsync(int id)
+    {
+        var response = await _http.DeleteAsync($"/api/themes/{id}");
         await EnsureSuccessOrThrowAsync(response);
     }
 
