@@ -9,7 +9,7 @@ namespace DVDCollectRWeb.Pages
         public async Task<IActionResult> OnGetAsync()
         {
             await HttpContext.SignOutAsync("MyCookieAuth");
-            return RedirectToPage("/Index");
+            return RedirectToPage("/Collection");
         }
     }
 }
