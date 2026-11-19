@@ -6,10 +6,11 @@
 **/dvds.db-shm
 **/dvds.db-wal
 /.vs
-/DVDCollectRAPI/bin/Debug/net10.0
+/DVDCollectRAPI/bin/Debug/net11.0
 /DVDCollectRAPI/obj
-/DVDCollectRShared/bin/Debug/net10.0
+/DVDCollectRShared/bin/Debug/net11.0
 /DVDCollectRShared/obj
-/DVDCollectRWeb/bin/Debug/net10.0
+/DVDCollectRWeb/bin/Debug/net11.0
 /DVDCollectRWeb/obj
 /DVDCollectRWeb/wwwroot/images/DVDs
+/DVDCollectRAPI/bin/Debug/net10.0
